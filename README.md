@@ -96,7 +96,7 @@ What's New:
 
 # 🏗 Ethereum Components
 
-🛠 The ready for use react-native-components are located in `frontend/Components`. They are designed to be used anywhere in your dApp.
+🛠 The ready for use react-native-components are located in `src/Components`. They are designed to be used anywhere in your dApp.
 
 ### `<CryptoAuth />`
 

@@ -40,6 +40,7 @@
     "base-64": "1.0.0",
     "buffer": "6.0.3",
     "env": "^0.0.2",
+    "ethers": "^5.5.4",
     "event-emitter": "^0.3.5",
     "events": "^1.1.1",
     "https-browserify": "~0.0.0",
