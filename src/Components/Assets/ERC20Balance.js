@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMoralis } from "react-moralis";
+import React, { useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import {
   FlatList,
   View,
@@ -8,45 +8,46 @@ import {
   StyleSheet,
   Pressable,
   ActivityIndicator,
-} from "react-native";
-import { getEllipsisTxt } from "../../utils/formatters";
-import useERC20Balance from "../../hooks/useERC20balance";
-import useTokenPrice from "../../hooks/useTokenPrice";
-import { Divider } from "@ui-kitten/components";
+} from 'react-native';
+import { getEllipsisTxt } from '../../utils/formatters';
+import useERC20Balance from '../../hooks/useERC20balance';
+import useTokenPrice from '../../hooks/useTokenPrice';
+import { Divider } from '@ui-kitten/components';
 
 const DefaultLogoBasedOnChain = ({ chain }) => {
-  if (chain == "0x1")
+  if (chain == '0x1')
     return (
       <Image
         source={{
-          uri:
-            "https://ethereum.org/static/6f05d59dc633140e4b547cb92f22e781/a7715/eth-diamond-purple-white.jpg",
+          uri: 'https://ethereum.org/static/6f05d59dc633140e4b547cb92f22e781/a7715/eth-diamond-purple-white.jpg',
         }}
-        style={styles.logo}></Image>
+        style={styles.logo}
+      ></Image>
     );
-  else if (chain == "0x38")
+  else if (chain == '0x38')
     return (
       <Image
         source={{
-          uri:
-            "https://assets.trustwalletapp.com/blockchains/smartchain/info/logo.png",
+          uri: 'https://assets.trustwalletapp.com/blockchains/smartchain/info/logo.png',
         }}
-        style={styles.logo}></Image>
+        style={styles.logo}
+      ></Image>
     );
-  else if (chain == "0x89")
+  else if (chain == '0x89')
     return (
       <Image
-        source={{ uri: "https://cryptologos.cc/logos/polygon-matic-logo.png" }}
-        style={styles.logo}></Image>
+        source={{ uri: 'https://cryptologos.cc/logos/polygon-matic-logo.png' }}
+        style={styles.logo}
+      ></Image>
     );
   else
     return (
       <Image
         source={{
-          uri:
-            "https://ethereum.org/static/6f05d59dc633140e4b547cb92f22e781/a7715/eth-diamond-purple-white.jpg",
+          uri: 'https://ethereum.org/static/6f05d59dc633140e4b547cb92f22e781/a7715/eth-diamond-purple-white.jpg',
         }}
-        style={styles.logo}></Image>
+        style={styles.logo}
+      ></Image>
     );
 };
 
@@ -60,7 +61,7 @@ const Item = ({ name, logo, balance, symbol, price, tokenAddress, chain }) => {
     tokenPrice && (isUSDMode ? tokenPrice.usdPrice : tokenPrice.nativePrice);
   const balanceFormatted = Math.round(balance * 100) / 100;
   const tokenPriceInNumber = tokenPriceFormatted
-    ? parseFloat(tokenPriceFormatted.substring(1).replace(/,/g, "")).toFixed(5)
+    ? parseFloat(tokenPriceFormatted.substring(1).replace(/,/g, '')).toFixed(5)
     : 0;
 
   return (
@@ -73,18 +74,19 @@ const Item = ({ name, logo, balance, symbol, price, tokenAddress, chain }) => {
             <DefaultLogoBasedOnChain chain={chain} />
           )}
         </View>
-        <View style={{ flex: 2, justifyContent: "center" }}>
+        <View style={{ flex: 2, justifyContent: 'center' }}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.balance} ellipsizeMode={"tail"}>
+          <Text style={styles.balance} ellipsizeMode={'tail'}>
             {balanceFormatted} {symbol}
           </Text>
         </View>
         <View
           style={{
             flex: 2,
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}>
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
           <Text style={styles.dollarBalance}>
             ${parseFloat(tokenPriceInNumber * balanceFormatted).toFixed(3)}
           </Text>
@@ -92,7 +94,7 @@ const Item = ({ name, logo, balance, symbol, price, tokenAddress, chain }) => {
         </View>
       </View>
 
-      <Divider style={{ width: "95%" }} />
+      <Divider style={{ width: '95%' }} />
     </View>
   );
 };
@@ -107,9 +109,7 @@ function ERC20Balance(props) {
         <Item
           name={item.name}
           logo={item.logo}
-          balance={parseFloat(
-            Moralis.Units.FromWei(item.balance, item.decimals).toFixed(6)
-          )}
+          balance={parseFloat(Moralis.Units.FromWei(item.balance, item.decimals).toFixed(6))}
           symbol={item.symbol}
           tokenAddress={item.token_address}
           chain={props.chain}
@@ -132,33 +132,33 @@ function ERC20Balance(props) {
 const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   itemView: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     padding: 20,
     // marginVertical: 8,
     marginHorizontal: 2,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   balance: {
     fontSize: 15,
-    color: "grey",
-    fontWeight: "400",
+    color: 'grey',
+    fontWeight: '400',
   },
   dollarBalance: {
     fontSize: 15,
-    color: "#414a4c",
-    fontWeight: "600",
+    color: '#414a4c',
+    fontWeight: '600',
   },
   name: {
     fontSize: 15,
-    color: "black",
-    fontWeight: "500",
+    color: 'black',
+    fontWeight: '500',
   },
   logo: {
     height: 40,

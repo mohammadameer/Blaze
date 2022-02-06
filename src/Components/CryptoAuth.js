@@ -1,158 +1,92 @@
-import React, {useState, createRef, useRef, useEffect} from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   ScrollView,
   Image,
-  Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
   Linking,
-  Animated,
-  Dimensions,
-  ImageBackground,
+  Pressable,
 } from 'react-native';
-import {
-  Button,
-  Paragraph,
-  Dialog,
-  Portal,
-  Provider,
-  ActivityIndicator,
-} from 'react-native-paper';
+import { Button, Paragraph, Dialog, Portal, Provider, ActivityIndicator } from 'react-native-paper';
 
-import {
-  useMoralis,
-  useMoralisWeb3Api,
-  useMoralisWeb3ApiCall,
-} from 'react-moralis';
-import {useWalletConnect} from '../WalletConnect';
+import { useMoralis } from 'react-moralis';
+import { useWalletConnect } from '../WalletConnect';
 import LottieView from 'lottie-react-native';
-import {ethers} from 'ethers';
+import { ethers } from 'ethers';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animation from '../splashLottie.json';
 
-// import Loader from './Components/Loader';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const connector = useWalletConnect();
-  const {
-    authenticate,
-    authError,
-    isAuthenticating,
-    isAuthenticated,
-    logout,
-    Moralis,
-  } = useMoralis();
+  const { authError, isAuthenticating, isAuthenticated, authenticate } = useMoralis();
 
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [errortext, setErrortext] = useState(false);
 
-  const showDialog = () => setVisible(true);
+  const connectWallet = () => {
+    authenticate({ connector })
+      .then((data) => {
+        console.log('data', data);
+        if (authError) {
+          setErrortext(authError.message);
+          setVisible(true);
+        } else {
+          if (isAuthenticated) {
+            navigation.replace('DrawerNavigationRoutes');
+          }
+        }
+      })
+      .catch(() => {});
+  };
 
-  const hideDialog = () => setVisible(false);
-
-  const passwordInputRef = createRef();
-
-  const handleCryptoLogin = () => {
-    const wallet = ethers.Wallet.createRandom();
-    console.log('address:', wallet.address);
-    console.log('mnemonic:', wallet.mnemonic.phrase);
-    console.log('privateKey:', wallet.privateKey);
-    // authenticate({connector})
-    //   .then(() => {
-    //     if (authError) {
-    //       setErrortext(authError.message);
-    //       setVisible(true);
-    //     } else {
-    //       if (isAuthenticated) {
-    //         navigation.replace('DrawerNavigationRoutes');
-    //       }
-    //     }
-    //   })
-    //   .catch(() => {});
+  const skip = () => {
+    navigation.replace('DrawerNavigationRoutes');
+    // const wallet = ethers.Wallet.createRandom();
+    // console.log('address:', wallet.address);
+    // console.log('mnemonic:', wallet.mnemonic.phrase);
+    // console.log('privateKey:', wallet.privateKey);
   };
 
   useEffect(() => {
-    isAuthenticated && navigation.replace('DrawerNavigationRoutes');
+    if (isAuthenticated) navigation.replace('DrawerNavigationRoutes');
   }, [isAuthenticated]);
 
   return (
-    <Provider>
-      <View style={styles.mainBody}>
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{
-            flex: 1,
-            justifyContent: 'center',
-            alignContent: 'center',
-          }}>
-          <Image
-            style={{flex: 1, maxWidth: '100%', alignSelf: 'center'}}
-            source={require('../eth.png')}
-          />
-          <View style={{flex: 1}}>
-            <KeyboardAvoidingView enabled>
-              <View style={{alignItems: 'center'}}>
-                <LottieView source={Animation} loop autoPlay />
-                <Image
-                  source={require('../moralis-logo.png')}
-                  style={{
-                    width: '50%',
-                    height: 100,
-                    resizeMode: 'contain',
-                    margin: 30,
-                  }}
-                />
-              </View>
+    <View style={{ flex: 1, padding: 20, justifyContent: 'flex-end' }}>
+      <Pressable
+        style={{
+          backgroundColor: '#18596B',
+          padding: 10,
+          borderRadius: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text
+          style={{ fontFamily: 'Righteous-Regular', fontSize: 26, color: 'white' }}
+          onPress={connectWallet}
+        >
+          Connect Wallet
+        </Text>
+      </Pressable>
 
-              <View>
-                {authError && (
-                  <Portal>
-                    <Dialog visible={visible} onDismiss={hideDialog}>
-                      <Dialog.Title>Authentication error:</Dialog.Title>
-                      <Dialog.Content>
-                        <Paragraph>
-                          {authError ? authError.message : ''}
-                        </Paragraph>
-                      </Dialog.Content>
-                      <Dialog.Actions>
-                        <Button onPress={hideDialog}>Done</Button>
-                      </Dialog.Actions>
-                    </Dialog>
-                  </Portal>
-                )}
-                {isAuthenticating && (
-                  <ActivityIndicator animating={true} color={'white'} />
-                )}
-              </View>
-
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={handleCryptoLogin}>
-                <Text style={styles.buttonTextStyle}>Crypto Wallet Login</Text>
-              </TouchableOpacity>
-              <Text
-                style={styles.registerTextStyle}
-                onPress={() =>
-                  Linking.openURL('https://ethereum.org/en/wallets/')
-                }>
-                What are wallets?
-              </Text>
-            </KeyboardAvoidingView>
-          </View>
-        </ScrollView>
-      </View>
-    </Provider>
+      <Pressable
+        style={{
+          backgroundColor: '#E5E5E5',
+          padding: 10,
+          borderRadius: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 25,
+        }}
+      >
+        <Text style={{ fontFamily: 'Righteous-Regular', fontSize: 26, color: 'black' }}>Skip</Text>
+      </Pressable>
+    </View>
   );
 };
 export default LoginScreen;

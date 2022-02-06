@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useMoralis, useWeb3Transfer } from "react-moralis";
-import { Button } from "@ui-kitten/components";
-import { ActivityIndicator, Colors, TextInput, Card } from "react-native-paper";
-import { Blockie } from "../Blockie";
-import { faAddressBook, faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { useMoralis, useWeb3Transfer } from 'react-moralis';
+import { Button } from '@ui-kitten/components';
+import { ActivityIndicator, Colors, TextInput, Card } from 'react-native-paper';
+import { Blockie } from '../Blockie';
+import { faAddressBook, faCoins } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-import { StyleSheet, SafeAreaView, StatusBar, View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import ERC20Balance from "../Assets/ERC20Balance";
-import { useWalletConnect } from "../../WalletConnect";
+import { StyleSheet, SafeAreaView, StatusBar, View, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import ERC20Balance from '../Assets/ERC20Balance';
+import { useWalletConnect } from '../../WalletConnect';
 
-const color = "#315399";
+const color = '#315399';
 
 function Transfer() {
   const [receiver, setReceiver] = useState();
@@ -27,15 +27,15 @@ function Transfer() {
   const { fetch, error, isFetching } = useWeb3Transfer(transferOptionsState);
 
   const { Moralis } = useMoralis();
-  const tokenDecimals = token ? token.decimals : "18";
-  const tokenAddress = token ? token.token_address : "";
+  const tokenDecimals = token ? token.decimals : '18';
+  const tokenAddress = token ? token.token_address : '';
 
   useEffect(() => {
     if (token && amount && receiver)
       setTransferOptionsState({
         amount: Moralis.Units.Token(amount, tokenDecimals), //Moralis.Units.ETH(0.5) -- if you want to send native currency
         receiver: receiver,
-        type: "erc20", // type: "native" -- if you want to send native currency
+        type: 'erc20', // type: "native" -- if you want to send native currency
         contractAddress: tokenAddress,
       });
   }, [token, amount, receiver]);
@@ -65,7 +65,7 @@ function Transfer() {
                   value={receiver}
                   placeholder="Public address (0x)"
                   onChangeText={(text) => setReceiver(text)}
-                  style={{ backgroundColor: "white" }}
+                  style={{ backgroundColor: 'white' }}
                   maxLength={42}
                 />
               </View>
@@ -81,7 +81,7 @@ function Transfer() {
                   value={amount}
                   keyboardType="numeric"
                   onChangeText={(text) => setAmount(text)}
-                  style={{ backgroundColor: "white" }}
+                  style={{ backgroundColor: 'white' }}
                 />
               </View>
             </View>
@@ -91,9 +91,7 @@ function Transfer() {
                 <Text style={styles.labelText}>Asset:</Text>
               </View>
               <View style={{ flex: 4 }}>
-                <Text style={styles.labelText}>
-                  {token ? token.symbol : ""}
-                </Text>
+                <Text style={styles.labelText}>{token ? token.symbol : ''}</Text>
               </View>
             </View>
           </View>
@@ -104,13 +102,10 @@ function Transfer() {
             <Button
               mode="contained"
               disabled={!(token && receiver && amount)}
-              style={
-                token && receiver && amount
-                  ? styles.button
-                  : styles.diabledButton
-              }
-              labelStyle={{ color: "white", fontSize: 20 }}
-              onPress={TransferTheCoins}>
+              style={token && receiver && amount ? styles.button : styles.diabledButton}
+              labelStyle={{ color: 'white', fontSize: 20 }}
+              onPress={TransferTheCoins}
+            >
               Transfer
             </Button>
           </View>
@@ -125,53 +120,53 @@ export default Transfer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   scrollViewContainer: {
     paddingHorizontal: 20,
     paddingTop: 10,
   },
   viewContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   headerText: {
-    color: "black",
-    fontWeight: "600",
+    color: 'black',
+    fontWeight: '600',
     fontSize: 30,
   },
   inputView: {
-    borderColor: "grey",
+    borderColor: 'grey',
     borderRadius: 15,
     borderWidth: 0.5,
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
     // shadowOffset: "5",
     elevation: 10,
     marginTop: 10,
     padding: 20,
-    shadowColor: "grey",
+    shadowColor: 'grey',
     // shadowOffset: { width: 0, height: 3 },
     // shadowOpacity: 0.2,
     // shadowRadius: 10,
   },
   scrollView: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     marginHorizontal: 10,
   },
   labelText: {
     fontSize: 20,
-    fontWeight: "400",
+    fontWeight: '400',
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: 'green',
     elevation: 5,
   },
   diabledButton: {
-    backgroundColor: "grey",
+    backgroundColor: 'grey',
   },
   justifyCenter: {
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
   },
   flex1: {
     flex: 1,
