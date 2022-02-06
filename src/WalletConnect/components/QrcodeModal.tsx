@@ -21,11 +21,11 @@ import WalletServiceRow from "./WalletServiceRow";
 
 const styles = StyleSheet.create({
   absolute: { position: "absolute" },
-  black: { backgroundColor: "black" },
+  black: { backgroundColor: "#2F2F2F" },
   white: { backgroundColor: "white" },
 
   center: { alignItems: "center", justifyContent: "center" },
-  border: { borderColor: "black", borderWidth: 10 },
+  border: { borderColor: "#2F2F2F", borderWidth: 10 },
   flex: { flex: 1 },
   fullWidth: { width: "100%" },
   halfHeight: { height: "50%" },

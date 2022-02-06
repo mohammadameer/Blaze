@@ -27,7 +27,12 @@ const ChartScreen = () => {
         }}
       >
         <Text
-          style={{ fontSize: 20, color: 'black', fontFamily: 'Righteous-Regular', marginRight: 5 }}
+          style={{
+            fontSize: 20,
+            color: '#2F2F2F',
+            fontFamily: 'Righteous-Regular',
+            marginRight: 5,
+          }}
         >{`${walletAddress.slice(0, 6)}...${walletAddress.slice(-6, -1)}`}</Text>
 
         <FontAwesomeIcon icon={faCopy} />
@@ -44,7 +49,7 @@ const ChartScreen = () => {
           marginTop: 40,
         }}
       >
-        <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Righteous-Regular' }}>
+        <Text style={{ fontSize: 30, color: '#2F2F2F', fontFamily: 'Righteous-Regular' }}>
           MoonPay
         </Text>
       </View>
@@ -60,7 +65,7 @@ const ChartScreen = () => {
           marginTop: 40,
         }}
       >
-        <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Righteous-Regular' }}>
+        <Text style={{ fontSize: 30, color: '#2F2F2F', fontFamily: 'Righteous-Regular' }}>
           Peer to Peer
         </Text>
       </View>
@@ -76,7 +81,7 @@ const ChartScreen = () => {
           marginTop: 40,
         }}
       >
-        <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Righteous-Regular' }}>
+        <Text style={{ fontSize: 30, color: '#2F2F2F', fontFamily: 'Righteous-Regular' }}>
           Instant
         </Text>
       </View>

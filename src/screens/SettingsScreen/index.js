@@ -33,7 +33,9 @@ const SettingsScreen = () => {
           justifyContent: 'center',
         }}
       >
-        <Text style={{ color: 'black', fontFamily: 'Righteous-Regular', fontSize: 40 }}>400$</Text>
+        <Text style={{ color: '#2F2F2F', fontFamily: 'Righteous-Regular', fontSize: 40 }}>
+          400$
+        </Text>
       </View>
 
       <View style={{ flexDirection: 'row', margin: 20, marginTop: 0 }}>
@@ -48,7 +50,7 @@ const SettingsScreen = () => {
             marginRight: 5,
           }}
         >
-          <Text style={{ color: 'black', fontFamily: 'Righteous-Regular', fontSize: 20 }}>
+          <Text style={{ color: '#2F2F2F', fontFamily: 'Righteous-Regular', fontSize: 20 }}>
             Deposit
           </Text>
         </View>
@@ -64,7 +66,7 @@ const SettingsScreen = () => {
             marginLeft: 5,
           }}
         >
-          <Text style={{ color: 'black', fontFamily: 'Righteous-Regular', fontSize: 20 }}>
+          <Text style={{ color: '#2F2F2F', fontFamily: 'Righteous-Regular', fontSize: 20 }}>
             Withdraw
           </Text>
         </View>

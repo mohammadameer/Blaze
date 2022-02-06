@@ -15,6 +15,7 @@ import DepositScreen from "./screens/DepositScreen"
 import WithdrawScreen from "./screens/WithdrawScreen"
 import SettingsScreen from "./screens/SettingsScreen"
 import ChartScreen from "./screens/ChartScreen"
+import NewWalletScreen from "./screens/NewWalletScreen"
 
 LogBox.ignoreAllLogs();
 
@@ -61,6 +62,11 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Auth"
           component={CryptoAuth}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NewWalletScreen"
+          component={NewWalletScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

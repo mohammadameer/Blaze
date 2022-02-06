@@ -1,39 +1,22 @@
-import React, { useState, createRef, useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Linking,
-  Pressable,
-} from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider, ActivityIndicator } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 
 import { useMoralis } from 'react-moralis';
 import { useWalletConnect } from '../WalletConnect';
-import LottieView from 'lottie-react-native';
 import { ethers } from 'ethers';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Animation from '../splashLottie.json';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const LoginScreen = ({ navigation }) => {
-  const connector = useWalletConnect();
-  const { authError, isAuthenticating, isAuthenticated, authenticate } = useMoralis();
+  const insets = useSafeAreaInsets();
 
-  const [visible, setVisible] = useState(false);
-  const [errortext, setErrortext] = useState(false);
+  const connector = useWalletConnect();
+  const { authError, isAuthenticated, authenticate } = useMoralis();
 
   const connectWallet = () => {
     authenticate({ connector })
-      .then((data) => {
-        console.log('data', data);
+      .then(() => {
         if (authError) {
-          setErrortext(authError.message);
-          setVisible(true);
+          console.log('authError', authError);
         } else {
           if (isAuthenticated) {
             navigation.replace('DrawerNavigationRoutes');
@@ -44,11 +27,9 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const skip = () => {
-    navigation.replace('DrawerNavigationRoutes');
-    // const wallet = ethers.Wallet.createRandom();
-    // console.log('address:', wallet.address);
-    // console.log('mnemonic:', wallet.mnemonic.phrase);
-    // console.log('privateKey:', wallet.privateKey);
+    const wallet = ethers.Wallet.createRandom();
+
+    navigation.replace('NewWalletScreen', { wallet });
   };
 
   useEffect(() => {
@@ -56,10 +37,18 @@ const LoginScreen = ({ navigation }) => {
   }, [isAuthenticated]);
 
   return (
-    <View style={{ flex: 1, padding: 20, justifyContent: 'flex-end' }}>
+    <View
+      style={{
+        flex: 1,
+        padding: 20,
+        justifyContent: 'flex-end',
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+      }}
+    >
       <Pressable
         style={{
-          backgroundColor: '#18596B',
+          backgroundColor: '#34C4EB',
           padding: 10,
           borderRadius: 20,
           justifyContent: 'center',
@@ -82,9 +71,13 @@ const LoginScreen = ({ navigation }) => {
           justifyContent: 'center',
           alignItems: 'center',
           marginTop: 25,
+          marginBottom: 20,
         }}
+        onPress={skip}
       >
-        <Text style={{ fontFamily: 'Righteous-Regular', fontSize: 26, color: 'black' }}>Skip</Text>
+        <Text style={{ fontFamily: 'Righteous-Regular', fontSize: 26, color: '#2F2F2F' }}>
+          Skip
+        </Text>
       </Pressable>
     </View>
   );
@@ -135,7 +128,7 @@ const styles = StyleSheet.create({
     borderColor: '#dadae8',
   },
   registerTextStyle: {
-    color: 'black',
+    color: '#2F2F2F',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 14,

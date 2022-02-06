@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {useMoralis, useMoralisWeb3Api} from 'react-moralis';
-import {View, Text, StyleSheet} from 'react-native';
-import {useMoralisDapp} from '../../providers/MoralisDappProvider/MoralisDappProvider';
-import {n4} from '../../utils/formatters';
+import React, { useEffect, useState } from 'react';
+import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
+import { View, Text, StyleSheet } from 'react-native';
+import { useMoralisDapp } from '../../providers/MoralisDappProvider/MoralisDappProvider';
+import { n4 } from '../../utils/formatters';
 import useNativeBalance from '../../hooks/useNativeBalance';
 
-import {getNativeByChain} from '../../utils/getNativeByChain';
+import { getNativeByChain } from '../../utils/getNativeByChain';
 
 function NativeBalance(props) {
-  const {account} = useMoralisWeb3Api();
-  const {Moralis} = useMoralis();
-  const {walletAddress, chainId: chain} = useMoralisDapp();
+  const { account } = useMoralisWeb3Api();
+  const { Moralis } = useMoralis();
+  const { walletAddress, chainId: chain } = useMoralisDapp();
   const [nativeChainString, setNativeChainString] = useState();
 
-  const {nativeBalance} = useNativeBalance(props?.chain || chainId);
+  const { nativeBalance } = useNativeBalance(props?.chain || chainId);
 
   return (
     <View style={styles.itemView}>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 15,
-    color: 'black',
+    color: '#2F2F2F',
     fontWeight: '500',
   },
 });

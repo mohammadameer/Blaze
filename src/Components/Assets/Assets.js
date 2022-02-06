@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   headerText: {
-    color: 'black',
+    color: '#2F2F2F',
     fontWeight: '600',
     fontSize: 35,
   },

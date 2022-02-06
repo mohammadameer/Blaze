@@ -25,7 +25,7 @@ const Item = ({ address, Moralis, value, logo, hash }) => (
     <View style={styles.itemView}>
       <View style={{ flex: 0.5, justifyContent: 'center' }}>
         <Text>🪙</Text>
-        {/* <FontAwesomeIcon icon={faWallet} color="black" size={15} /> */}
+        {/* <FontAwesomeIcon icon={faWallet} color="#2F2F2F" size={15} /> */}
       </View>
       <View style={{ flex: 3, justifyContent: 'center' }}>
         <Text style={styles.text}>{getEllipsisTxt(hash, 7)}</Text>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   headerText: {
-    color: 'black',
+    color: '#2F2F2F',
     fontWeight: '600',
     fontSize: 30,
   },
@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 10,
-    color: 'black',
+    color: '#2F2F2F',
   },
   text: {
     fontSize: 15,
-    color: 'black',
+    color: '#2F2F2F',
     fontWeight: '500',
   },
   flex1: {

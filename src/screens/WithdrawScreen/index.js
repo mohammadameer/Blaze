@@ -27,7 +27,7 @@ const WithdrawScreen = () => {
         style={{
           fontSize: 25,
           fontFamily: 'Righteous-Regular',
-          color: 'black',
+          color: '#2F2F2F',
           textAlign: 'center',
         }}
       >
@@ -44,7 +44,7 @@ const WithdrawScreen = () => {
           marginTop: 40,
         }}
       >
-        <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Righteous-Regular' }}>
+        <Text style={{ fontSize: 30, color: '#2F2F2F', fontFamily: 'Righteous-Regular' }}>
           Peer to Peer
         </Text>
       </View>
@@ -60,7 +60,7 @@ const WithdrawScreen = () => {
           marginTop: 40,
         }}
       >
-        <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Righteous-Regular' }}>
+        <Text style={{ fontSize: 30, color: '#2F2F2F', fontFamily: 'Righteous-Regular' }}>
           Instant Withdraw
         </Text>
       </View>

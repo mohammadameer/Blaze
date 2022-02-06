@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMoralis } from "react-moralis";
+import React, { useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import {
   FlatList,
   View,
@@ -11,16 +11,16 @@ import {
   Clipboard,
   Linking,
   Alert,
-} from "react-native";
-import { getEllipsisTxt } from "../../utils/formatters";
-import { Divider, Card, Button, Tooltip } from "@ui-kitten/components";
-import { faCopy } from "@fortawesome/free-regular-svg-icons";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+} from 'react-native';
+import { getEllipsisTxt } from '../../utils/formatters';
+import { Divider, Card, Button, Tooltip } from '@ui-kitten/components';
+import { faCopy } from '@fortawesome/free-regular-svg-icons';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { getExplorer } from "../../helpers/networks";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useMoralisDapp } from "../../providers/MoralisDappProvider/MoralisDappProvider";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { getExplorer } from '../../helpers/networks';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useMoralisDapp } from '../../providers/MoralisDappProvider/MoralisDappProvider';
 
 function TransactionDetails(props) {
   const [tipVisible, setTipVisible] = useState(false);
@@ -33,12 +33,8 @@ function TransactionDetails(props) {
 
   const renderAddress = () => (
     <TouchableOpacity onPress={() => copyToClipboard()}>
-      <Text
-        ellipsizeMode={"middle"}
-        numberOfLines={1}
-        style={styles.contentLabel}>
-        {props?.transactionDetails.address}{" "}
-        <FontAwesomeIcon icon={faCopy} color="grey" />
+      <Text ellipsizeMode={'middle'} numberOfLines={1} style={styles.contentLabel}>
+        {props?.transactionDetails.address} <FontAwesomeIcon icon={faCopy} color="grey" />
       </Text>
     </TouchableOpacity>
   );
@@ -51,17 +47,16 @@ function TransactionDetails(props) {
         <Text style={styles.label}>Transaction Hash </Text>
         <Text
           style={styles.linkText}
-          ellipsizeMode={"middle"}
+          ellipsizeMode={'middle'}
           numberOfLines={1}
           onPress={() =>
             Linking.openURL(
-              `${getExplorer(chainId)}/tx/${
-                props?.transactionDetails.transaction_hash
-              }`
+              `${getExplorer(chainId)}/tx/${props?.transactionDetails.transaction_hash}`
             )
           }
-          dataDetectorType={"link"}>
-          {props?.transactionDetails.transaction_hash}{" "}
+          dataDetectorType={'link'}
+        >
+          {props?.transactionDetails.transaction_hash}{' '}
           <FontAwesomeIcon icon={faExternalLinkAlt} color="grey" size={15} />
         </Text>
 
@@ -69,7 +64,8 @@ function TransactionDetails(props) {
         <Tooltip
           anchor={renderAddress}
           visible={tipVisible}
-          onBackdropPress={() => setTipVisible(false)}>
+          onBackdropPress={() => setTipVisible(false)}
+        >
           Copied Address 😻
         </Tooltip>
 
@@ -79,18 +75,12 @@ function TransactionDetails(props) {
         <Text>{props?.transactionDetails.block_number}</Text>
 
         <Text style={styles.label}>From Address</Text>
-        <Text
-          style={styles.contentLabel}
-          ellipsizeMode={"middle"}
-          numberOfLines={1}>
+        <Text style={styles.contentLabel} ellipsizeMode={'middle'} numberOfLines={1}>
           {props?.transactionDetails.from_address}
         </Text>
 
         <Text style={styles.label}>To Address</Text>
-        <Text
-          style={styles.contentLabel}
-          ellipsizeMode={"middle"}
-          numberOfLines={1}>
+        <Text style={styles.contentLabel} ellipsizeMode={'middle'} numberOfLines={1}>
           {props?.transactionDetails.to_address}
         </Text>
       </View>
@@ -109,25 +99,25 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     paddingHorizontal: 5,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     borderRadius: 10,
   },
   label: {
     fontSize: 15,
-    color: "#414a4c",
+    color: '#414a4c',
     paddingTop: 10,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   contentLabel: {
-    width: "50%",
+    width: '50%',
   },
   headerText: {
-    color: "black",
-    fontWeight: "600",
+    color: '#2F2F2F',
+    fontWeight: '600',
     fontSize: 25,
   },
-  linkText: { color: "black", fontSize: 15 },
+  linkText: { color: '#2F2F2F', fontSize: 15 },
   button: {
     marginVertical: 5,
     paddingTop: 5,

@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headerText: {
-    color: 'black',
+    color: '#2F2F2F',
     fontWeight: '600',
     fontSize: 30,
   },
